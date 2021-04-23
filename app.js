@@ -58,19 +58,20 @@ mainTitle.textContent = `Write the name of your city and press 'Enter'.`;
 
 function printWeather(city) {
 
+    resultsDiv.innerHTML = '<img class="spinner" src="resources/circle-notch-solid.svg" width="24px" alt="loading..." />';
+
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=f59095b255decdf854a5ca0e339c7ee4`)
         .then(response => response.json())
         .then(data => {
-            if(data.cod === '404') {
+            if (data.cod === '404') {
                 resultsDiv.textContent = `City '${city}' was not found.`
             } else {
 
                 resultsDiv.innerText = `City: ${data.name}, ${data.sys.country}\n
-                                            Weather: ${data.weather[0].main} - ${data.weather[0].description}\n
-                                            Temperature: ${tempConvert(data.main.temp).toFixed(1)} C`
+                                        Weather: ${data.weather[0].main} - ${data.weather[0].description}\n
+                                        Temperature: ${tempConvert(data.main.temp).toFixed(1)} C`
             }
-        })
-
+    })
 }
 
 function tempConvert(temp) {
