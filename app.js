@@ -45,10 +45,11 @@ let inputBoxCityStyle = 'background-color: rgba(255,255,255,0.2);' +
     'width: 50%;' +
     'outline: none;' +
     'color: white;' +
-    'font-weight: bold;' +
-    'font-size: 16px;';
+    'font-size: 16px;' +
+    'margin-top: 20px;' +
+    'margin-bottom: 20px;';
 
-let mainTitleStyle = 'font-size: 20px;';
+let mainTitleStyle = 'font-size: 20px; font-weight: normal; text-shadow: 0 2px 2px rgba(0,0,0,0.3)';
 
 /*
 give small components their content
@@ -67,13 +68,16 @@ function printWeather(city) {
                 resultsDiv.textContent = `City '${city}' was not found.`
             } else {
 
-                resultsDiv.innerText = `City: ${data.name}, ${data.sys.country}\n
-                                        Weather: ${data.weather[0].main} - ${data.weather[0].description}\n
+                resultsDiv.innerText = `City: ${data.name}, ${data.sys.country}
+                                        Weather: ${data.weather[0].main} - ${data.weather[0].description}
                                         Temperature: ${tempConvert(data.main.temp).toFixed(1)} C`
             }
     })
 }
 
+/*
+convert kelvin to celsius
+ */
 function tempConvert(temp) {
     return temp - 273.15;
 }
@@ -85,9 +89,10 @@ window.addEventListener('load', event => {
 
     inputBoxCity.style =  inputBoxCityStyle;
     inputBoxCity.placeholder = 'enter a city here';
+    inputBoxCity.autocomplete = 'none';
 
     mainTitle.style = mainTitleStyle;
-    resultsDiv.style = 'padding: 15px;';
+    resultsDiv.style = 'padding: 15px; line-height: 42px; font-size: 24px; text-shadow: 0 2px 2px rgba(0,0,0,0.3)';
 
     mainBody.appendChild(mainDiv);
 
